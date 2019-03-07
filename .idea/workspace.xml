@@ -124,6 +124,15 @@
     </option>
   </component>
   <component name="RunManager" selected="Go Build.go build demo2.go">
+    <configuration name="go build demo1.go (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="gopcp.v2" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/chapter7/errgroup/demo1.go" />
+      <package value="gopcp.v2" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build demo1.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="gopcp.v2" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -157,10 +166,12 @@
       <item itemvalue="Go Test.TestRequest in gopcp.v2/chapter6/webcrawler/module" />
       <item itemvalue="Go Build.go build demo1.go" />
       <item itemvalue="Go Build.go build demo2.go" />
+      <item itemvalue="Go Build.go build demo1.go (1)" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Go Build.go build demo2.go" />
+        <item itemvalue="Go Build.go build demo1.go (1)" />
         <item itemvalue="Go Build.go build demo1.go" />
         <item itemvalue="Go Test.TestRequest in gopcp.v2/chapter6/webcrawler/module" />
       </list>
