@@ -14,7 +14,7 @@ func main() {
 	select {
 	case e := <-intChan:
 		fmt.Printf("Received: %v\n", e)
-	case <-time.NewTimer(time.Millisecond * 500).C:
+	case <-time.NewTimer(2 * time.Second).C:
 		fmt.Println("Timeout!")
 	}
 }
