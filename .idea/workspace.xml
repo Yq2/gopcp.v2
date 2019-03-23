@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d2699853-eed5-4858-b93d-d068cf582c92" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/chapter7/benchmark/demo1_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chapter7/break_line/demo1.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,36 +18,42 @@
     <session id="1664186565">
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="go" value="3" />
+          <entry key="go" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Go" value="3" />
+          <entry key="Go" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="go" value="8" />
+          <entry key="go" value="243" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Go" value="8" />
+          <entry key="Go" value="243" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.open.time.5" value="2" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/chapter7/benchmark/demo1_test.go">
+        <entry file="file://$PROJECT_DIR$/chapter7/break_line/demo1.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="24" column="34" lean-forward="true" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
-              <folding>
-                <element signature="e#19#58#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="475">
+              <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -61,7 +67,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" path="D:\Program Files\Go" />
+  <component name="GOROOT" path="D:/Program Files (x86)/Go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -78,6 +84,7 @@
         <option value="$PROJECT_DIR$/chapter7/errgroup/demo4.go" />
         <option value="$PROJECT_DIR$/chapter7/benchmark/demo1.go" />
         <option value="$PROJECT_DIR$/chapter7/benchmark/demo1_test.go" />
+        <option value="$PROJECT_DIR$/chapter7/break_line/demo1.go" />
       </list>
     </option>
   </component>
@@ -88,10 +95,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="y" value="40" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
+    <option name="x" value="-102" />
+    <option name="y" value="108" />
+    <option name="width" value="1936" />
+    <option name="height" value="583" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -111,13 +118,12 @@
             <path>
               <item name="gopcp.v2" type="b2602c69:ProjectViewProjectNode" />
               <item name="gopcp.v2" type="462c0819:PsiDirectoryNode" />
-              <item name="chapter7" type="462c0819:PsiDirectoryNode" />
+              <item name="chapter6" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="gopcp.v2" type="b2602c69:ProjectViewProjectNode" />
               <item name="gopcp.v2" type="462c0819:PsiDirectoryNode" />
               <item name="chapter7" type="462c0819:PsiDirectoryNode" />
-              <item name="benchmark" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -148,12 +154,12 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Test.gobench demo1_test.go">
-    <configuration name="go build chantimeout2.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Go Build.go build demo1.go">
+    <configuration name="go build demo1.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="gopcp.v2" />
       <working_directory value="$PROJECT_DIR$/" />
       <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/chapter4/timer/timeout/v2/chantimeout2.go" />
+      <filePath value="$PROJECT_DIR$/chapter7/break_line/demo1.go" />
       <package value="gopcp.v2" />
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
@@ -196,19 +202,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Go Build.go build chantimeout2.go" />
       <item itemvalue="Go Build.go build timebase2.go" />
       <item itemvalue="Go Build.go build demo3.go" />
       <item itemvalue="Go Build.go build demo4.go" />
       <item itemvalue="Go Test.gobench demo1_test.go" />
+      <item itemvalue="Go Build.go build demo1.go" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build demo1.go" />
         <item itemvalue="Go Test.gobench demo1_test.go" />
         <item itemvalue="Go Build.go build demo3.go" />
         <item itemvalue="Go Build.go build demo4.go" />
         <item itemvalue="Go Build.go build timebase2.go" />
-        <item itemvalue="Go Build.go build chantimeout2.go" />
       </list>
     </recent_temporary>
   </component>
@@ -267,6 +273,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/chapter6/webcrawler/errors/errors.go">
@@ -446,9 +455,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding>
-            <element signature="e#14#39#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -496,11 +502,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/chapter7/benchmark/demo1_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="24" column="34" lean-forward="true" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
-          <folding>
-            <element signature="e#19#58#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="570">
+          <caret line="30" column="1" lean-forward="true" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chapter7/break_line/demo1.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
         </state>
       </provider>
     </entry>
