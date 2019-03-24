@@ -19,17 +19,17 @@ L1:
 	}
 
 	fmt.Println("contine 语句规则展示")
-	L2:
-		for i :=0 ;;i++{
-			for j := 0;;j++ {
-				if i >= 5 {
-					continue L2
-				}
-				if j > 10 {
-					continue
-				}
-				fmt.Printf("i=%d,j=%d\n", i, j)
+L2:
+	for i := 0; ; i++ {
+		for j := 0; ; j++ {
+			fmt.Printf("i=%d,j=%d\n", i, j)
+			if i >= 5 {
+				continue L2
 			}
+			if j > 10 {
+				continue
+			}
+		}
 	}
-		fmt.Println("展示结束")
+	fmt.Println("展示结束")
 }
