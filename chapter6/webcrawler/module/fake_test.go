@@ -22,20 +22,20 @@ var fakeModules = []Module{
 
 // defaultFakeModuleMap 代表组件类型与默认仿造实例的映射。
 var defaultFakeModuleMap = map[Type]Module{
-	TYPE_DOWNLOADER: defaultFakeDownloader,
-	TYPE_ANALYZER:   defaultFakeAnalyzer,
-	TYPE_PIPELINE:   defaultFakePipeline,
+	TypeDownloader: defaultFakeDownloader,
+	TypeAnalyzer:   defaultFakeAnalyzer,
+	TypePipeline:   defaultFakePipeline,
 }
 
 // fakeModuleFuncMap 代表组件类型与仿造实例生成函数的映射。
 var fakeModuleFuncMap = map[Type]func(mid MID) Module{
-	TYPE_DOWNLOADER: func(mid MID) Module {
+	TypeDownloader: func(mid MID) Module {
 		return NewFakeDownloader(mid, CalculateScoreSimple)
 	},
-	TYPE_ANALYZER: func(mid MID) Module {
+	TypeAnalyzer: func(mid MID) Module {
 		return NewFakeAnalyzer(mid, CalculateScoreSimple)
 	},
-	TYPE_PIPELINE: func(mid MID) Module {
+	TypePipeline: func(mid MID) Module {
 		return NewFakePipeline(mid, CalculateScoreSimple)
 	},
 }

@@ -18,7 +18,7 @@ func GetDownloaders(number uint8) ([]module.Downloader, error) {
 	}
 	for i := uint8(0); i < number; i++ {
 		mid, err := module.GenMID(
-			module.TYPE_DOWNLOADER, snGen.Get(), nil)
+			module.TypeDownloader, snGen.Get(), nil)
 		if err != nil {
 			return downloaders, err
 		}
@@ -40,7 +40,7 @@ func GetAnalyzers(number uint8) ([]module.Analyzer, error) {
 	}
 	for i := uint8(0); i < number; i++ {
 		mid, err := module.GenMID(
-			module.TYPE_ANALYZER, snGen.Get(), nil)
+			module.TypeAnalyzer, snGen.Get(), nil)
 		if err != nil {
 			return analyzers, err
 		}
@@ -62,7 +62,7 @@ func GetPipelines(number uint8, dirPath string) ([]module.Pipeline, error) {
 	}
 	for i := uint8(0); i < number; i++ {
 		mid, err := module.GenMID(
-			module.TYPE_PIPELINE, snGen.Get(), nil)
+			module.TypePipeline, snGen.Get(), nil)
 		if err != nil {
 			return pipelines, err
 		}

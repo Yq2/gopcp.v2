@@ -384,7 +384,7 @@ func (sched *myScheduler) downloadOne(req *module.Request) {
 	if sched.canceled() {
 		return
 	}
-	m, err := sched.registrar.Get(module.TYPE_DOWNLOADER)
+	m, err := sched.registrar.Get(module.TypeDownloader)
 	if err != nil || m == nil {
 		errMsg := fmt.Sprintf("couldn't get a downloader: %s", err)
 		sendError(errors.New(errMsg), "", sched.errorBufferPool)
@@ -439,7 +439,7 @@ func (sched *myScheduler) analyzeOne(resp *module.Response) {
 	if sched.canceled() {
 		return
 	}
-	m, err := sched.registrar.Get(module.TYPE_ANALYZER)
+	m, err := sched.registrar.Get(module.TypeAnalyzer)
 	if err != nil || m == nil {
 		errMsg := fmt.Sprintf("couldn't get an analyzer: %s", err)
 		sendError(errors.New(errMsg), "", sched.errorBufferPool)
@@ -505,7 +505,7 @@ func (sched *myScheduler) pickOne(item module.Item) {
 	if sched.canceled() {
 		return
 	}
-	m, err := sched.registrar.Get(module.TYPE_PIPELINE)
+	m, err := sched.registrar.Get(module.TypePipeline)
 	if err != nil || m == nil {
 		errMsg := fmt.Sprintf("couldn't get a pipeline: %s", err)
 		sendError(errors.New(errMsg), "", sched.errorBufferPool)

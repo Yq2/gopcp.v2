@@ -12,13 +12,13 @@ type ErrorType string
 // 错误类型常量。
 const (
 	// ERROR_TYPE_DOWNLOADER 代表下载器错误。
-	ERROR_TYPE_DOWNLOADER ErrorType = "downloader error"
+	ErrorTypeDownloader ErrorType = "downloader error"
 	// ERROR_TYPE_ANALYZER 代表分析器错误。
-	ERROR_TYPE_ANALYZER ErrorType = "analyzer error"
+	ErrorTypeAnalyzer ErrorType = "analyzer error"
 	// ERROR_TYPE_PIPELINE 代表条目处理管道错误。
-	ERROR_TYPE_PIPELINE ErrorType = "pipeline error"
+	ErrorTypePipeline ErrorType = "pipeline error"
 	// ERROR_TYPE_SCHEDULER 代表调度器错误。
-	ERROR_TYPE_SCHEDULER ErrorType = "scheduler error"
+	ErrorTypeScheduler ErrorType = "scheduler error"
 )
 
 // CrawlerError 代表爬虫错误的接口类型。

@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-const CURRENT_NUM = 600000
+const CURRENT_NUM = 600
 
 func removeFile(path string) error {
 	file, err := os.Open(path)
@@ -40,7 +40,7 @@ func TestIDataFile(t *testing.T) {
 				t.Fatalf("Open file error: %s\n", err)
 			}
 		}()
-		max := 1000
+		max := 10
 		t.Run("WriteAndRead", func(t *testing.T) {
 			testRW(path2, dataLen, max, t)
 		})
@@ -101,7 +101,7 @@ func testRW(path string, dataLen uint32, max int, t *testing.T) {
 	var wg sync.WaitGroup
 	wg.Add(CURRENT_NUM)
 	// 写入。写入携程要比读取多
-	for i := 0; i < CURRENT_NUM * 2/3; i++ {
+	for i := 0; i < CURRENT_NUM*2/3; i++ {
 		go func() {
 			defer wg.Done()
 			var prevWSN int64 = -1
@@ -123,7 +123,7 @@ func testRW(path string, dataLen uint32, max int, t *testing.T) {
 		}()
 	}
 	// 读取。读取携程要少于写入携程
-	for i := 0; i < CURRENT_NUM * 1/3; i++ {
+	for i := 0; i < CURRENT_NUM*1/3; i++ {
 		go func() {
 			defer wg.Done()
 			var prevRSN int64 = -1

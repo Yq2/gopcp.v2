@@ -14,7 +14,7 @@ func TestRegNew(t *testing.T) {
 }
 
 func TestRegRegister(t *testing.T) {
-	mt := TYPE_DOWNLOADER
+	mt := TypeDownloader
 	ml := legalTypeLetterMap[mt]
 	sn := DefaultSNGen.Get()
 	addr, _ := NewAddr("http", "127.0.0.1", 8080)
@@ -194,7 +194,7 @@ func TestModuleGet(t *testing.T) {
 		t.Fatalf("It still can get module instance with illegal type %q!",
 			mt)
 	}
-	mt = TYPE_DOWNLOADER
+	mt = TypeDownloader
 	m1, err = registrar.Get(mt)
 	if err == nil {
 		t.Fatal("No error when get nonexistent module instance!")

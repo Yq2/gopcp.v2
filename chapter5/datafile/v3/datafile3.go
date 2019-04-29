@@ -56,7 +56,7 @@ func (df *myDataFile) Read() (rsn int64, d Data, err error) {
 	var offset int64
 	for {
 		offset = atomic.LoadInt64(&df.roffset)
-		if atomic.CompareAndSwapInt64(&df.roffset, offset, (offset + int64(df.dataLen))) {
+		if atomic.CompareAndSwapInt64(&df.roffset, offset, offset+int64(df.dataLen)) {
 			break
 		}
 	}
@@ -85,7 +85,7 @@ func (df *myDataFile) Write(d Data) (wsn int64, err error) {
 	var offset int64
 	for {
 		offset = atomic.LoadInt64(&df.woffset)
-		if atomic.CompareAndSwapInt64(&df.woffset, offset, (offset + int64(df.dataLen))) {
+		if atomic.CompareAndSwapInt64(&df.woffset, offset, offset+int64(df.dataLen)) {
 			break
 		}
 	}

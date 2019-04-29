@@ -6,25 +6,25 @@ type Type string
 // 当前认可的组件类型的常量。
 const (
 	// TYPE_DOWNLOADER 代表下载器。
-	TYPE_DOWNLOADER Type = "downloader"
+	TypeDownloader Type = "downloader"
 	// TYPE_ANALYZER 代表分析器。
-	TYPE_ANALYZER Type = "analyzer"
+	TypeAnalyzer Type = "analyzer"
 	// TYPE_PIPELINE 代表条目处理管道。
-	TYPE_PIPELINE Type = "pipeline"
+	TypePipeline Type = "pipeline"
 )
 
 // legalTypeLetterMap 代表合法的组件类型-字母的映射。
 var legalTypeLetterMap = map[Type]string{
-	TYPE_DOWNLOADER: "D",
-	TYPE_ANALYZER:   "A",
-	TYPE_PIPELINE:   "P",
+	TypeDownloader: "D",
+	TypeAnalyzer:   "A",
+	TypePipeline:   "P",
 }
 
 // legalLetterTypeMap 代表合法的字母-组件类型的映射。
 var legalLetterTypeMap = map[string]Type{
-	"D": TYPE_DOWNLOADER,
-	"A": TYPE_ANALYZER,
-	"P": TYPE_PIPELINE,
+	"D": TypeDownloader,
+	"A": TypeAnalyzer,
+	"P": TypePipeline,
 }
 
 // CheckType 用于判断组件实例的类型是否匹配。
@@ -33,15 +33,15 @@ func CheckType(moduleType Type, module Module) bool {
 		return false
 	}
 	switch moduleType {
-	case TYPE_DOWNLOADER:
+	case TypeDownloader:
 		if _, ok := module.(Downloader); ok {
 			return true
 		}
-	case TYPE_ANALYZER:
+	case TypeAnalyzer:
 		if _, ok := module.(Analyzer); ok {
 			return true
 		}
-	case TYPE_PIPELINE:
+	case TypePipeline:
 		if _, ok := module.(Pipeline); ok {
 			return true
 		}
@@ -86,11 +86,11 @@ func getLetter(moduleType Type) (bool, string) {
 // 若给定的组件类型不合法，则第一个结果值会是false。
 func typeToLetter(moduleType Type) (bool, string) {
 	switch moduleType {
-	case TYPE_DOWNLOADER:
+	case TypeDownloader:
 		return true, "D"
-	case TYPE_ANALYZER:
+	case TypeAnalyzer:
 		return true, "A"
-	case TYPE_PIPELINE:
+	case TypePipeline:
 		return true, "P"
 	default:
 		return false, ""
@@ -102,11 +102,11 @@ func typeToLetter(moduleType Type) (bool, string) {
 func letterToType(letter string) (bool, Type) {
 	switch letter {
 	case "D":
-		return true, TYPE_DOWNLOADER
+		return true, TypeDownloader
 	case "A":
-		return true, TYPE_ANALYZER
+		return true, TypeAnalyzer
 	case "P":
-		return true, TYPE_PIPELINE
+		return true, TypePipeline
 	default:
 		return false, ""
 	}

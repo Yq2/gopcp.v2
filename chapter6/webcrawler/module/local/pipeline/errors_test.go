@@ -8,7 +8,7 @@ import (
 
 func TestErrorGenError(t *testing.T) {
 	simpleErrMsg := "testing error"
-	expectedErrType := errors.ERROR_TYPE_PIPELINE
+	expectedErrType := errors.ErrorTypePipeline
 	err := genError(simpleErrMsg)
 	ce, ok := err.(errors.CrawlerError)
 	if !ok {

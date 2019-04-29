@@ -26,6 +26,7 @@ type Registrar interface {
 
 // NewRegistrar 用于创建一个组件注册器的实例。
 func NewRegistrar() Registrar {
+	// 字面量初始化方法
 	return &myRegistrar{
 		moduleTypeMap: map[Type]map[MID]Module{},
 	}

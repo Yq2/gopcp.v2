@@ -5,13 +5,13 @@ import (
 	"testing"
 
 	werrors "gopcp.v2/chapter6/webcrawler/errors"
-	"gopcp.v2/chapter6/webcrawler/toolkit/buffer"
 	"gopcp.v2/chapter6/webcrawler/module"
+	"gopcp.v2/chapter6/webcrawler/toolkit/buffer"
 )
 
 func TestErrorGen(t *testing.T) {
 	simpleErrMsg := "testing error"
-	expectedErrType := werrors.ERROR_TYPE_SCHEDULER
+	expectedErrType := werrors.ErrorTypeScheduler
 	err := genError(simpleErrMsg)
 	ce, ok := err.(werrors.CrawlerError)
 	if !ok {
@@ -32,7 +32,7 @@ func TestErrorGen(t *testing.T) {
 func TestErrorGenByError(t *testing.T) {
 	simpleErrMsg := "testing error"
 	simpleErr := errors.New(simpleErrMsg)
-	expectedErrType := werrors.ERROR_TYPE_SCHEDULER
+	expectedErrType := werrors.ErrorTypeScheduler
 	err := genErrorByError(simpleErr)
 	ce, ok := err.(werrors.CrawlerError)
 	if !ok {
@@ -52,7 +52,7 @@ func TestErrorGenByError(t *testing.T) {
 
 func TestParameterErrorGen(t *testing.T) {
 	simpleErrMsg := "testing error"
-	expectedErrType := werrors.ERROR_TYPE_SCHEDULER
+	expectedErrType := werrors.ErrorTypeScheduler
 	err := genParameterError(simpleErrMsg)
 	ce, ok := err.(werrors.CrawlerError)
 	if !ok {
@@ -72,7 +72,7 @@ func TestParameterErrorGen(t *testing.T) {
 
 func TestErrorSend(t *testing.T) {
 	cerr := werrors.NewCrawlerError(
-		werrors.ERROR_TYPE_SCHEDULER, "testing error")
+		werrors.ErrorTypeScheduler, "testing error")
 	mid := module.MID("")
 	buffer, _ := buffer.NewPool(10, 2)
 	if !sendError(cerr, mid, buffer) {

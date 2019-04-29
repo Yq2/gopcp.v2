@@ -6,9 +6,9 @@ import (
 )
 
 var legalTypes = []Type{
-	TYPE_DOWNLOADER,
-	TYPE_ANALYZER,
-	TYPE_PIPELINE,
+	TypeDownloader,
+	TypeAnalyzer,
+	TypePipeline,
 }
 
 var illegalTypes = []Type{
@@ -19,7 +19,7 @@ func TestTypeCheck(t *testing.T) {
 	if CheckType("", fakeModules[0]) {
 		t.Fatal("The module type is invalid, but do not be detected!")
 	}
-	if CheckType(TYPE_DOWNLOADER, nil) {
+	if CheckType(TypeDownloader, nil) {
 		t.Fatal("The module is nil, but do not be detected!")
 	}
 	for _, mt := range legalTypes {
