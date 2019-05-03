@@ -60,6 +60,7 @@ func (registrar *myRegistrar) Register(module Module) (bool, error) {
 	if modules == nil {
 		modules = map[MID]Module{}
 	}
+	// 同一个mid不重复存储
 	if _, ok := modules[mid]; ok {
 		return false, nil
 	}
@@ -97,9 +98,6 @@ func (registrar *myRegistrar) Get(moduleType Type) (Module, error) {
 	var selectedModule Module
 	for _, module := range modules {
 		SetScore(module)
-		if err != nil {
-			return nil, err
-		}
 		score := module.Score()
 		if minScore == 0 || score < minScore {
 			selectedModule = module

@@ -49,6 +49,7 @@ type myAnalyzer struct {
 }
 
 func (analyzer *myAnalyzer) RespParsers() []module.ParseResponse {
+	// 直接返回切片是有风险的
 	parsers := make([]module.ParseResponse, len(analyzer.respParsers))
 	copy(parsers, analyzer.respParsers)
 	return parsers
@@ -56,6 +57,7 @@ func (analyzer *myAnalyzer) RespParsers() []module.ParseResponse {
 
 func (analyzer *myAnalyzer) Analyze(
 	resp *module.Response) (dataList []module.Data, errorList []error) {
+
 	analyzer.ModuleInternal.IncrHandlingNumber()
 	defer analyzer.ModuleInternal.DecrHandlingNumber()
 	analyzer.ModuleInternal.IncrCalledCount()
@@ -82,6 +84,7 @@ func (analyzer *myAnalyzer) Analyze(
 			genParameterError("nil HTTP request URL"))
 		return
 	}
+	// 当条件检查没有错误时表示接受处理
 	analyzer.ModuleInternal.IncrAcceptedCount()
 	respDepth := resp.Depth()
 	logger.Infof("Parse the response (URL: %s, depth: %d)... \n",
@@ -117,6 +120,7 @@ func (analyzer *myAnalyzer) Analyze(
 			}
 		}
 	}
+	// 只有当整个过程没有错误才算完成处理
 	if len(errorList) == 0 {
 		analyzer.ModuleInternal.IncrCompletedCount()
 	}

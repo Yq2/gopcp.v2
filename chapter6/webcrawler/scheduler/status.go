@@ -9,20 +9,20 @@ import (
 type Status uint8
 
 const (
-	// SCHED_STATUS_UNINITIALIZED 代表未初始化的状态。
-	SCHED_STATUS_UNINITIALIZED Status = 0
-	// SCHED_STATUS_INITIALIZING 代表正在初始化的状态。
-	SCHED_STATUS_INITIALIZING Status = 1
-	// SCHED_STATUS_INITIALIZED 代表已初始化的状态。
-	SCHED_STATUS_INITIALIZED Status = 2
-	// SCHED_STATUS_STARTING 代表正在启动的状态。
-	SCHED_STATUS_STARTING Status = 3
-	// SCHED_STATUS_STARTED 代表已启动的状态。
-	SCHED_STATUS_STARTED Status = 4
-	// SCHED_STATUS_STOPPING 代表正在停止的状态。
-	SCHED_STATUS_STOPPING Status = 5
-	// SCHED_STATUS_STOPPED 代表已停止的状态。
-	SCHED_STATUS_STOPPED Status = 6
+	// SchedStatusUninitialized 代表未初始化的状态。
+	SchedStatusUninitialized Status = 0
+	// SchedStatusInitializing 代表正在初始化的状态。
+	SchedStatusInitializing Status = 1
+	// SchedStatusInitialized 代表已初始化的状态。
+	SchedStatusInitialized Status = 2
+	// SchedStatusStarting 代表正在启动的状态。
+	SchedStatusStarting Status = 3
+	// SchedStatusStarted 代表已启动的状态。
+	SchedStatusStarted Status = 4
+	// SchedStatusStopping 代表正在停止的状态。
+	SchedStatusStopping Status = 5
+	// SchedStatusStopped 代表已停止的状态。
+	SchedStatusStopped Status = 6
 )
 
 // checkStatus 用于状态的检查。
@@ -43,37 +43,37 @@ func checkStatus(
 		defer lock.Unlock()
 	}
 	switch currentStatus {
-	case SCHED_STATUS_INITIALIZING:
+	case SchedStatusInitializing:
 		err = genError("the scheduler is being initialized!")
-	case SCHED_STATUS_STARTING:
+	case SchedStatusStarting:
 		err = genError("the scheduler is being started!")
-	case SCHED_STATUS_STOPPING:
+	case SchedStatusStopping:
 		err = genError("the scheduler is being stopped!")
 	}
 	if err != nil {
 		return
 	}
-	if currentStatus == SCHED_STATUS_UNINITIALIZED &&
-		(wantedStatus == SCHED_STATUS_STARTING ||
-			wantedStatus == SCHED_STATUS_STOPPING) {
+	if currentStatus == SchedStatusUninitialized &&
+		(wantedStatus == SchedStatusStarting ||
+			wantedStatus == SchedStatusStopping) {
 		err = genError("the scheduler has not yet been initialized!")
 		return
 	}
 	switch wantedStatus {
-	case SCHED_STATUS_INITIALIZING:
+	case SchedStatusInitializing:
 		switch currentStatus {
-		case SCHED_STATUS_STARTED:
+		case SchedStatusStarted:
 			err = genError("the scheduler has been started!")
 		}
-	case SCHED_STATUS_STARTING:
+	case SchedStatusStarting:
 		switch currentStatus {
-		case SCHED_STATUS_UNINITIALIZED:
+		case SchedStatusUninitialized:
 			err = genError("the scheduler has not been initialized!")
-		case SCHED_STATUS_STARTED:
+		case SchedStatusStarted:
 			err = genError("the scheduler has been started!")
 		}
-	case SCHED_STATUS_STOPPING:
-		if currentStatus != SCHED_STATUS_STARTED {
+	case SchedStatusStopping:
+		if currentStatus != SchedStatusStarted {
 			err = genError("the scheduler has not been started!")
 		}
 	default:
@@ -88,19 +88,19 @@ func checkStatus(
 // GetStatusDescription 用于获取状态的文字描述。
 func GetStatusDescription(status Status) string {
 	switch status {
-	case SCHED_STATUS_UNINITIALIZED:
+	case SchedStatusUninitialized:
 		return "uninitialized"
-	case SCHED_STATUS_INITIALIZING:
+	case SchedStatusInitializing:
 		return "initializing"
-	case SCHED_STATUS_INITIALIZED:
+	case SchedStatusInitialized:
 		return "initialized"
-	case SCHED_STATUS_STARTING:
+	case SchedStatusStarting:
 		return "starting"
-	case SCHED_STATUS_STARTED:
+	case SchedStatusStarted:
 		return "started"
-	case SCHED_STATUS_STOPPING:
+	case SchedStatusStopping:
 		return "stopping"
-	case SCHED_STATUS_STOPPED:
+	case SchedStatusStopped:
 		return "stopped"
 	default:
 		return "unknown"

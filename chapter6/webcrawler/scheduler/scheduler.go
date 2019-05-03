@@ -87,7 +87,7 @@ func (sched *myScheduler) Init(
 	logger.Info("Check status for initialization...")
 	var oldStatus Status
 	oldStatus, err =
-		sched.checkAndSetStatus(SCHED_STATUS_INITIALIZING)
+		sched.checkAndSetStatus(SchedStatusInitializing)
 	if err != nil {
 		return
 	}
@@ -96,7 +96,7 @@ func (sched *myScheduler) Init(
 		if err != nil {
 			sched.status = oldStatus
 		} else {
-			sched.status = SCHED_STATUS_INITIALIZED
+			sched.status = SchedStatusInitialized
 		}
 		sched.statusLock.Unlock()
 	}()
@@ -127,7 +127,7 @@ func (sched *myScheduler) Init(
 	sched.acceptedDomainMap, _ =
 		cmap.NewConcurrentMap(1, nil)
 	for _, domain := range requestArgs.AcceptedDomains {
-		sched.acceptedDomainMap.Put(domain, struct{}{})
+		_, _ = sched.acceptedDomainMap.Put(domain, struct{}{})
 	}
 	logger.Infof("-- Accepted primary domains: %v",
 		requestArgs.AcceptedDomains)
@@ -160,13 +160,13 @@ func (sched *myScheduler) Start(firstHTTPReq *http.Request) (err error) {
 	logger.Info("Check status for start...")
 	var oldStatus Status
 	oldStatus, err =
-		sched.checkAndSetStatus(SCHED_STATUS_STARTING)
+		sched.checkAndSetStatus(SchedStatusStarting)
 	defer func() {
 		sched.statusLock.Lock()
 		if err != nil {
 			sched.status = oldStatus
 		} else {
-			sched.status = SCHED_STATUS_STARTED
+			sched.status = SchedStatusStarted
 		}
 		sched.statusLock.Unlock()
 	}()
@@ -210,13 +210,13 @@ func (sched *myScheduler) Stop() (err error) {
 	logger.Info("Check status for stop...")
 	var oldStatus Status
 	oldStatus, err =
-		sched.checkAndSetStatus(SCHED_STATUS_STOPPING)
+		sched.checkAndSetStatus(SchedStatusStopping)
 	defer func() {
 		sched.statusLock.Lock()
 		if err != nil {
 			sched.status = oldStatus
 		} else {
-			sched.status = SCHED_STATUS_STOPPED
+			sched.status = SchedStatusStopped
 		}
 		sched.statusLock.Unlock()
 	}()
@@ -293,6 +293,7 @@ func (sched *myScheduler) Summary() SchedSummary {
 // checkAndSetStatus 用于状态的检查，并在条件满足时设置状态。
 func (sched *myScheduler) checkAndSetStatus(
 	wantedStatus Status) (oldStatus Status, err error) {
+
 	sched.statusLock.Lock()
 	defer sched.statusLock.Unlock()
 	oldStatus = sched.status
@@ -576,7 +577,7 @@ func (sched *myScheduler) sendReq(req *module.Request) bool {
 			logger.Warnln("The request buffer pool was closed. Ignore request sending.")
 		}
 	}(req)
-	sched.urlMap.Put(reqURL.String(), struct{}{})
+	_, _ = sched.urlMap.Put(reqURL.String(), struct{}{})
 	return true
 }
 

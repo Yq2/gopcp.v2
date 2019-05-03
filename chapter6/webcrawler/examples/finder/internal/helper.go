@@ -2,10 +2,9 @@ package internal
 
 import (
 	"fmt"
+	"gopcp.v2/helper/log"
 	"os"
 	"path/filepath"
-
-	"gopcp.v2/helper/log"
 )
 
 // 日志记录器。
@@ -25,19 +24,19 @@ func checkDirPath(dirPath string) (absDirPath string, err error) {
 			return
 		}
 	}
-	var dir *os.File
-	dir, err = os.Open(absDirPath)
+	var dirFile *os.File
+	dirFile, err = os.Open(absDirPath)
 	if err != nil && !os.IsNotExist(err) {
 		return
 	}
-	if dir == nil {
+	if dirFile == nil {
 		err = os.MkdirAll(absDirPath, 0700)
 		if err != nil && !os.IsExist(err) {
 			return
 		}
 	} else {
 		var fileInfo os.FileInfo
-		fileInfo, err = dir.Stat()
+		fileInfo, err = dirFile.Stat()
 		if err != nil {
 			return
 		}

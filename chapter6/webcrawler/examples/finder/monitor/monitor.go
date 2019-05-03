@@ -227,7 +227,7 @@ func reportError(
 
 // waitForSchedulerStart 用于等待调度器开启。
 func waitForSchedulerStart(scheduler sched.Scheduler) {
-	for scheduler.Status() != sched.SCHED_STATUS_STARTED {
+	for scheduler.Status() != sched.SchedStatusStarted {
 		time.Sleep(time.Microsecond)
 	}
 }

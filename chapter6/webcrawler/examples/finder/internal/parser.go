@@ -13,6 +13,7 @@ import (
 
 // genResponseParses 用于生成响应解析器。
 func genResponseParsers() []module.ParseResponse {
+	// 1 解析链接
 	parseLink := func(httpResp *http.Response, respDepth uint32) ([]module.Data, []error) {
 		dataList := make([]module.Data, 0)
 		// 检查响应。
@@ -74,6 +75,7 @@ func genResponseParsers() []module.ParseResponse {
 				return
 			}
 			if !aURL.IsAbs() {
+				// 把相对URL拼接成完整URL
 				aURL = reqURL.ResolveReference(aURL)
 			}
 			httpReq, err := http.NewRequest("GET", aURL.String(), nil)
@@ -110,6 +112,7 @@ func genResponseParsers() []module.ParseResponse {
 		})
 		return dataList, errs
 	}
+	// 2 解析图片标签
 	parseImg := func(httpResp *http.Response, respDepth uint32) ([]module.Data, []error) {
 		// 检查响应。
 		if httpResp == nil {
@@ -164,5 +167,6 @@ func genResponseParsers() []module.ParseResponse {
 		dataList = append(dataList, module.Item(item))
 		return dataList, nil
 	}
+
 	return []module.ParseResponse{parseLink, parseImg}
 }

@@ -12,6 +12,7 @@ import (
 
 // genItemProcessors 用于生成条目处理器。
 func genItemProcessors(dirPath string) []module.ProcessItem {
+	// 1 保存图片
 	savePicture := func(item module.Item) (result module.Item, err error) {
 		if item == nil {
 			return nil, errors.New("invalid item!")
@@ -62,6 +63,8 @@ func genItemProcessors(dirPath string) []module.ProcessItem {
 		result["file_size"] = fileInfo.Size()
 		return result, nil
 	}
+
+	// 2 记录图片信息
 	recordPicture := func(item module.Item) (result module.Item, err error) {
 		v := item["file_path"]
 		path, ok := v.(string)
@@ -76,5 +79,6 @@ func genItemProcessors(dirPath string) []module.ProcessItem {
 		logger.Infof("Saved file: %s, size: %d byte(s).", path, size)
 		return nil, nil
 	}
+
 	return []module.ProcessItem{savePicture, recordPicture}
 }

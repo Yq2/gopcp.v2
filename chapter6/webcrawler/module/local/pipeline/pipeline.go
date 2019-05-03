@@ -26,6 +26,7 @@ func New(
 	if len(itemProcessors) == 0 {
 		return nil, genParameterError("empty item processor list")
 	}
+	// copy itemProcessors
 	var innerProcessors []module.ProcessItem
 	for i, pipeline := range itemProcessors {
 		if pipeline == nil {
@@ -70,9 +71,11 @@ func (pipeline *myPipeline) Send(item module.Item) []error {
 	logger.Infof("Process item %+v... \n", item)
 	var currentItem = item
 	for _, processor := range pipeline.itemProcessors {
+		// 条目处理管道依次处理 currentItem
 		processedItem, err := processor(currentItem)
 		if err != nil {
 			errs = append(errs, err)
+			// 判断是否为快速失败
 			if pipeline.failFast {
 				break
 			}
@@ -81,6 +84,7 @@ func (pipeline *myPipeline) Send(item module.Item) []error {
 			currentItem = processedItem
 		}
 	}
+	// 如果currentItem 在所有的条目处理管道里都成功
 	if len(errs) == 0 {
 		pipeline.ModuleInternal.IncrCompletedCount()
 	}
