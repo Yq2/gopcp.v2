@@ -43,7 +43,7 @@ func NewGenerator(pset ParamSet) (lib.Generator, error) {
 		timeoutNS:  pset.TimeoutNS,
 		lps:        pset.LPS,
 		durationNS: pset.DurationNS,
-		status:     lib.STATUS_ORIGINAL,
+		status:     lib.StatusOriginal,
 		resultCh:   pset.ResultCh,
 	}
 	if err := gen.init(); err != nil {
@@ -115,7 +115,7 @@ func (gen *myGenerator) asyncCall() {
 				logger.Errorln(errMsg)
 				result := &lib.CallResult{
 					ID:   -1,
-					Code: lib.RET_CODE_FATAL_CALL,
+					Code: lib.RetCodeFatalCall,
 					Msg:  errMsg}
 				gen.sendResult(result)
 			}
@@ -131,7 +131,7 @@ func (gen *myGenerator) asyncCall() {
 			result := &lib.CallResult{
 				ID:     rawReq.ID,
 				Req:    rawReq,
-				Code:   lib.RET_CODE_WARNING_CALL_TIMEOUT,
+				Code:   lib.RetCodeWarningCallTimeout,
 				Msg:    fmt.Sprintf("Timeout! (expected: < %v)", gen.timeoutNS),
 				Elapse: gen.timeoutNS,
 			}
@@ -147,7 +147,7 @@ func (gen *myGenerator) asyncCall() {
 			result = &lib.CallResult{
 				ID:     rawResp.ID,
 				Req:    rawReq,
-				Code:   lib.RET_CODE_ERROR_CALL,
+				Code:   lib.RetCodeErrorCall,
 				Msg:    rawResp.Err.Error(),
 				Elapse: rawResp.Elapse}
 		} else {
@@ -160,7 +160,7 @@ func (gen *myGenerator) asyncCall() {
 
 // sendResult 用于发送调用结果。
 func (gen *myGenerator) sendResult(result *lib.CallResult) bool {
-	if atomic.LoadUint32(&gen.status) != lib.STATUS_STARTED {
+	if atomic.LoadUint32(&gen.status) != lib.StatusStarted {
 		gen.printIgnoredResult(result, "stopped load generator")
 		return false
 	}
@@ -185,10 +185,10 @@ func (gen *myGenerator) printIgnoredResult(result *lib.CallResult, cause string)
 func (gen *myGenerator) prepareToStop(ctxError error) {
 	logger.Infof("Prepare to stop load generator (cause: %s)...", ctxError)
 	atomic.CompareAndSwapUint32(
-		&gen.status, lib.STATUS_STARTED, lib.STATUS_STOPPING)
+		&gen.status, lib.StatusStarted, lib.StatusStopping)
 	logger.Infof("Closing result channel...")
 	close(gen.resultCh)
-	atomic.StoreUint32(&gen.status, lib.STATUS_STOPPED)
+	atomic.StoreUint32(&gen.status, lib.StatusStopped)
 }
 
 // genLoad 会产生载荷并向承受方发送。
@@ -217,9 +217,9 @@ func (gen *myGenerator) Start() bool {
 	logger.Infoln("Starting load generator...")
 	// 检查是否具备可启动的状态，顺便设置状态为正在启动
 	if !atomic.CompareAndSwapUint32(
-		&gen.status, lib.STATUS_ORIGINAL, lib.STATUS_STARTING) {
+		&gen.status, lib.StatusOriginal, lib.StatusStarting) {
 		if !atomic.CompareAndSwapUint32(
-			&gen.status, lib.STATUS_STOPPED, lib.STATUS_STARTING) {
+			&gen.status, lib.StatusStopped, lib.StatusStarting) {
 			return false
 		}
 	}
@@ -240,7 +240,7 @@ func (gen *myGenerator) Start() bool {
 	gen.callCount = 0
 
 	// 设置状态为已启动。
-	atomic.StoreUint32(&gen.status, lib.STATUS_STARTED)
+	atomic.StoreUint32(&gen.status, lib.StatusStarted)
 
 	go func() {
 		// 生成并发送载荷。
@@ -253,12 +253,12 @@ func (gen *myGenerator) Start() bool {
 
 func (gen *myGenerator) Stop() bool {
 	if !atomic.CompareAndSwapUint32(
-		&gen.status, lib.STATUS_STARTED, lib.STATUS_STOPPING) {
+		&gen.status, lib.StatusStarted, lib.StatusStopping) {
 		return false
 	}
 	gen.cancelFunc()
 	for {
-		if atomic.LoadUint32(&gen.status) == lib.STATUS_STOPPED {
+		if atomic.LoadUint32(&gen.status) == lib.StatusStopped {
 			break
 		}
 		time.Sleep(time.Microsecond)

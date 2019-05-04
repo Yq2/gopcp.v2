@@ -23,29 +23,29 @@ type RetCode int
 
 // 保留 1 ~ 1000 给载荷承受方使用。
 const (
-	RET_CODE_SUCCESS              RetCode = 0    // 成功。
-	RET_CODE_WARNING_CALL_TIMEOUT         = 1001 // 调用超时警告。
-	RET_CODE_ERROR_CALL                   = 2001 // 调用错误。
-	RET_CODE_ERROR_RESPONSE               = 2002 // 响应内容错误。
-	RET_CODE_ERROR_CALEE                  = 2003 // 被调用方（被测软件）的内部错误。
-	RET_CODE_FATAL_CALL                   = 3001 // 调用过程中发生了致命错误！
+	RetCodeSuccess            RetCode = 0    // 成功。
+	RetCodeWarningCallTimeout         = 1001 // 调用超时警告。
+	RetCodeErrorCall                  = 2001 // 调用错误。
+	RetCodeErrorResponse              = 2002 // 响应内容错误。
+	RetCodeErrorCalee                 = 2003 // 被调用方（被测软件）的内部错误。
+	RetCodeFatalCall                  = 3001 // 调用过程中发生了致命错误！
 )
 
 // GetRetCodePlain 会依据结果代码返回相应的文字解释。
 func GetRetCodePlain(code RetCode) string {
 	var codePlain string
 	switch code {
-	case RET_CODE_SUCCESS:
+	case RetCodeSuccess:
 		codePlain = "Success"
-	case RET_CODE_WARNING_CALL_TIMEOUT:
+	case RetCodeWarningCallTimeout:
 		codePlain = "Call Timeout Warning"
-	case RET_CODE_ERROR_CALL:
+	case RetCodeErrorCall:
 		codePlain = "Call Error"
-	case RET_CODE_ERROR_RESPONSE:
+	case RetCodeErrorResponse:
 		codePlain = "Response Error"
-	case RET_CODE_ERROR_CALEE:
+	case RetCodeErrorCalee:
 		codePlain = "Callee Error"
-	case RET_CODE_FATAL_CALL:
+	case RetCodeFatalCall:
 		codePlain = "Call Fatal Error"
 	default:
 		codePlain = "Unknown result code"
@@ -66,15 +66,15 @@ type CallResult struct {
 // 声明代表载荷发生器状态的常量。
 const (
 	// STATUS_ORIGINAL 代表原始。
-	STATUS_ORIGINAL uint32 = 0
+	StatusOriginal uint32 = 0
 	// STATUS_STARTING 代表正在启动。
-	STATUS_STARTING uint32 = 1
+	StatusStarting uint32 = 1
 	// STATUS_STARTED 代表已启动。
-	STATUS_STARTED uint32 = 2
+	StatusStarted uint32 = 2
 	// STATUS_STOPPING 代表正在停止。
-	STATUS_STOPPING uint32 = 3
+	StatusStopping uint32 = 3
 	// STATUS_STOPPED 代表已停止。
-	STATUS_STOPPED uint32 = 4
+	StatusStopped uint32 = 4
 )
 
 // Generator 表示载荷发生器的接口。

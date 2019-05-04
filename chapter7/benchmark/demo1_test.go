@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func BenchmarkSprintf(b *testing.B) {
+func BenchmarkSprint(b *testing.B) {
 	num := 10
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
@@ -22,7 +22,7 @@ func BenchmarkFormat(b *testing.B) {
 	}
 }
 
-func BenchmarkItoa(b *testing.B) {
+func BenchmarkIota(b *testing.B) {
 	num := 10
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {

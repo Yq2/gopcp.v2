@@ -65,7 +65,7 @@ func TestStart(t *testing.T) {
 	}
 
 	t.Logf("Total: %d.\n", total)
-	successCount := countMap[loadgenlib.RET_CODE_SUCCESS]
+	successCount := countMap[loadgenlib.RetCodeSuccess]
 	tps := float64(successCount) / float64(pset.DurationNS/1e9)
 	t.Logf("Loads per second: %d; Treatments per second: %f.\n", pset.LPS, tps)
 }
@@ -130,7 +130,7 @@ func TestStop(t *testing.T) {
 	}
 
 	t.Logf("Total: %d.\n", total)
-	successCount := countMap[loadgenlib.RET_CODE_SUCCESS]
+	successCount := countMap[loadgenlib.RetCodeSuccess]
 	tps := float64(successCount) / float64(timeoutNS/1e9)
 	t.Logf("Loads per second: %d; Treatments per second: %f.\n", pset.LPS, tps)
 }

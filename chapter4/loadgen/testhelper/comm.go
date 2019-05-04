@@ -72,7 +72,7 @@ func (comm *TCPComm) CheckResp(
 	var sreq ServerReq
 	err := json.Unmarshal(rawReq.Req, &sreq)
 	if err != nil {
-		commResult.Code = loadgenlib.RET_CODE_FATAL_CALL
+		commResult.Code = loadgenlib.RetCodeFatalCall
 		commResult.Msg =
 			fmt.Sprintf("Incorrectly formatted Req: %s!\n", string(rawReq.Req))
 		return &commResult
@@ -80,32 +80,32 @@ func (comm *TCPComm) CheckResp(
 	var sresp ServerResp
 	err = json.Unmarshal(rawResp.Resp, &sresp)
 	if err != nil {
-		commResult.Code = loadgenlib.RET_CODE_ERROR_RESPONSE
+		commResult.Code = loadgenlib.RetCodeErrorResponse
 		commResult.Msg =
 			fmt.Sprintf("Incorrectly formatted Resp: %s!\n", string(rawResp.Resp))
 		return &commResult
 	}
 	if sresp.ID != sreq.ID {
-		commResult.Code = loadgenlib.RET_CODE_ERROR_RESPONSE
+		commResult.Code = loadgenlib.RetCodeErrorResponse
 		commResult.Msg =
 			fmt.Sprintf("Inconsistent raw id! (%d != %d)\n", rawReq.ID, rawResp.ID)
 		return &commResult
 	}
 	if sresp.Err != nil {
-		commResult.Code = loadgenlib.RET_CODE_ERROR_CALEE
+		commResult.Code = loadgenlib.RetCodeErrorCalee
 		commResult.Msg =
 			fmt.Sprintf("Abnormal server: %s!\n", sresp.Err)
 		return &commResult
 	}
 	if sresp.Result != op(sreq.Operands, sreq.Operator) {
-		commResult.Code = loadgenlib.RET_CODE_ERROR_RESPONSE
+		commResult.Code = loadgenlib.RetCodeErrorResponse
 		commResult.Msg =
 			fmt.Sprintf(
 				"Incorrect result: %s!\n",
 				genFormula(sreq.Operands, sreq.Operator, sresp.Result, false))
 		return &commResult
 	}
-	commResult.Code = loadgenlib.RET_CODE_SUCCESS
+	commResult.Code = loadgenlib.RetCodeSuccess
 	commResult.Msg = fmt.Sprintf("Success. (%s)", sresp.Formula)
 	return &commResult
 }
